@@ -98,6 +98,11 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/goToActivity2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go to second activity !" />
 
 
 
