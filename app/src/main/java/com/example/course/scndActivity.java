@@ -14,7 +14,7 @@ public class scndActivity extends AppCompatActivity {
 
     // Name the variables for the widgets
     Button goToActivity1;
-    Button increaseCounter;
+    Button increaseCounter, decreaseCounter;
     TextView textCounter;
 
     int count = 0;
@@ -38,37 +38,33 @@ public class scndActivity extends AppCompatActivity {
             }
         });
 
-        increaseCounter = findViewById(R.id.btnCounter);
+        increaseCounter = findViewById(R.id.btnIncrease);
+        textCounter = findViewById(R.id.nbrCountTxt);
         increaseCounter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                textCounter = findViewById(R.id.nbrCountTxt);
-                textCounter.setText("" + count);
                 count += 1;
+                textCounter.setText("" + count);
+            }
+        });
+
+        decreaseCounter = findViewById(R.id.btnDecrease);
+        decreaseCounter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                count -= 1;
+                textCounter.setText(""+count);
             }
         });
     }
 
     @Override
     protected void onPause() {
-        saveData();
         super.onPause();
-    }
-
-    public void saveData(){
-        sharedPreferences = getSharedPreferences("saveData", Context.MODE_PRIVATE);
-        counterValue = textCounter.getText().toString();
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("counterValue", counterValue);
-        editor.commit();
     }
 
     @Override
     public void onResume() {
-        sharedPreferences = getSharedPreferences("saveData", Context.MODE_PRIVATE);
-        counterValueRetrieved = sharedPreferences.getString("counterValue", null);
-        textCounter.setText(counterValueRetrieved);
-
         super.onResume();
     }
 
